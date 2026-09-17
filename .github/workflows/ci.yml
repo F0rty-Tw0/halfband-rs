@@ -58,6 +58,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
+      # `cargo pkgid` below needs a lock file; nothing earlier in this job
+      # writes one.
+      - run: cargo generate-lockfile
       # The packaged crate must build on its own, from the published files.
       - run: cargo publish --package halfband-rs --dry-run
       - name: CHANGELOG covers the crate version
