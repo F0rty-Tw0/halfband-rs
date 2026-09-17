@@ -1,0 +1,29 @@
+[package]
+name = "halfband-rs"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.98"
+authors = ["Artiom Tofan <artiomtofancv@gmail.com>"]
+description = "Kaiser half-band decimation filter and a multi-rate sample cascade with absolute indexing, for octave-by-octave analysis"
+documentation = "https://docs.rs/halfband-rs"
+readme = "README.md"
+license = "MIT"
+repository = "https://github.com/F0rty-Tw0/halfband-rs"
+keywords = ["dsp", "decimation", "multirate", "audio", "filter"]
+categories = ["multimedia::audio", "science", "mathematics"]
+exclude = ["/.github/**", "/.gitignore"]
+
+[lib]
+name = "halfband_rs"
+path = "src/lib.rs"
+
+[features]
+default = ["parallel"]
+# Spread long decimations and copies over a rayon thread pool.
+parallel = ["dep:rayon"]
+
+[dependencies]
+rayon = { version = "1.10", optional = true }
+
+[lints.rust]
+unsafe_code = "forbid"
