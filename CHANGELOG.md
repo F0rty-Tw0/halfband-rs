@@ -1,4 +1,4 @@
-# 0.1.0 - 2026-09-17
+# 0.1.0 - 2026-09-23
 
 Extracted from cqt-rs 0.2.0, where these types were private modules.
 
