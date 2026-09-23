@@ -21,6 +21,10 @@ impl HalfBand {
     /// transition width (`0..1`, as a fraction of the input Nyquist
     /// frequency) and stop-band attenuation in dB. The pass-band therefore
     /// extends to `(1 - transition) / 2` of the input Nyquist frequency.
+    ///
+    /// The Kaiser tap-count estimate can land about a decibel short:
+    /// `design(0.2, 80.0)` measures 78.8 dB. `examples/response.rs` measures
+    /// any design.
     pub fn design(transition: f64, attenuation_db: f64) -> Self {
         let taps = Self::taps_for(transition, attenuation_db);
         let beta = if attenuation_db > 50.0 {

@@ -2,16 +2,16 @@
 name = "halfband-rs"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.98"
+rust-version = "1.85"
 authors = ["Artiom Tofan <artiomtofancv@gmail.com>"]
-description = "Kaiser half-band decimation filter and a multi-rate sample cascade with absolute indexing, for octave-by-octave analysis"
+description = "Read every octave of a signal at the same instant: a Kaiser half-band decimation filter and a zero-phase, streaming-safe downsampling cascade with absolute indexing"
 documentation = "https://docs.rs/halfband-rs"
 readme = "README.md"
 license = "MIT"
 repository = "https://github.com/F0rty-Tw0/halfband-rs"
-keywords = ["dsp", "decimation", "multirate", "audio", "filter"]
+keywords = ["dsp", "decimation", "multirate", "audio", "downsampling"]
 categories = ["multimedia::audio", "science", "mathematics"]
-exclude = ["/.github/**", "/.gitignore"]
+exclude = ["/.github/**", "/.gitignore", "/docs/**"]
 
 [lib]
 name = "halfband_rs"
@@ -24,6 +24,14 @@ parallel = ["dep:rayon"]
 
 [dependencies]
 rayon = { version = "1.10", optional = true }
+
+[dev-dependencies]
+# 0.8 needs Rust 1.86, above this crate's 1.85 minimum.
+criterion = { version = "0.7", default-features = false, features = ["cargo_bench_support"] }
+
+[[bench]]
+name = "decimate"
+harness = false
 
 [lints.rust]
 unsafe_code = "forbid"
